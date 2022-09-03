@@ -16,8 +16,9 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (this.currentOperand === '.' && this.currentOperand.includes('.'))
+    if (this.currentOperand === '.' && this.currentOperand.includes('.')) {
       return;
+    }
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
 
@@ -95,8 +96,12 @@ const operationButtons = document.querySelectorAll('[data-operation]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const deleteButton = document.querySelector('[data-delete]');
 const equalsButton = document.querySelector('[data-equals]');
-const currentOperandTextElement = document.querySelector('[current-operand]');
-const previousOperandTextElement = document.querySelector('[previous-operand]');
+const currentOperandTextElement = document.querySelector(
+  '[data-current-operand]'
+);
+const previousOperandTextElement = document.querySelector(
+  '[data-previous-operand]'
+);
 
 const calculator = new Calculator(
   previousOperandTextElement,
@@ -119,15 +124,15 @@ operationButtons.forEach(button => {
 
 equalsButton.addEventListener('click', () => {
   calculator.calculateAndDisplay();
-  updateDisplay();
+  calculator.updateDisplay();
 });
 
 allClearButton.addEventListener('click', () => {
   calculator.clear();
-  updateDisplay();
+  calculator.updateDisplay();
 });
 
 deleteButton.addEventListener('click', () => {
   calculator.delete();
-  updateDisplay();
+  calculator.updateDisplay();
 });
